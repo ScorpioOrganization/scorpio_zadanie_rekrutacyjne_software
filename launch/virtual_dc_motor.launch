@@ -1,0 +1,4 @@
+<launch>
+  <node name="virtual_dc_motor" pkg="virtual_dc_motor" type="virtual_dc_motor" output="log" respawn="true"></node>
+  <!-- You can add your nodes here to launch them! :) -->
+</launch>
