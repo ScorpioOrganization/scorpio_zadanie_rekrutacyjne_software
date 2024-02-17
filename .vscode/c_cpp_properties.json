@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/igor/scorpio/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/igor/scorpio/src/autonomy/include/**",
+        "/home/igor/scorpio/src/rover_cameras/include/**",
+        "/home/igor/scorpio/src/tools/include/**",
+        "/home/igor/scorpio/src/scorpio_zadanie_rekrutacyjne_software/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
