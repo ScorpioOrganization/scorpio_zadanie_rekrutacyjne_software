@@ -18,7 +18,7 @@ public:
      *
      * @param msg  Pointer to the received message
      */
-    void controlSignalCallback(const std_msgs::Int8::ConstPtr &msg);
+    void controlSignalCallback(const std_msgs::Int8::ConstPtr&);
 
     void run();
 
