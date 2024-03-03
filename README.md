@@ -21,7 +21,7 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko kodo
 1. W repozytorium, na którego stronie się właśnie najprawdopodobniej znajdujesz ([link](https://github.com/ScorpioOrganization/scorpio_zadanie_rekrutacyjne_software)) została przygotowana paczka ROS zawierająca napisany przez nas symulator silnika z enkoderem absolutnym. Repozytorium należy sklonować i zbudować paczkę w ROS. Szczegóły działania paczki są opisane w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
 > **Wskazówka!** Dobrym rozwiązaniem jest "fork" paczki
 
-2. Stwórz prostą stronę internetową (z użyciem HTML, CSS, natywny JavaScript, oraz ewentualnego Reacta), która wyświetli aktualne pozycje silników (są one do pobrania na ROSowych topicach `/virtual_dc_motor_node/get_position_0`, `/virtual_dc_motor_node/get_position_1`, `/virtual_dc_motor_node/get_position_2`) w postaci kąta z zakresu [0°;360°).
+2. Stwórz prostą stronę internetową (z użyciem HTML, CSS, natywny JavaScript, oraz ewentualnego Reacta), która wyświetli aktualne pozycję wszystkich silników (są one do pobrania na ROSowych topicach `/virtual_dc_motor_node/get_position_0`, `/virtual_dc_motor_node/get_position_1`, `/virtual_dc_motor_node/get_position_2`) w postaci kąta z zakresu [0°;360°).
 
 > **Uwaga!** Silnik pierwotnie się nie rusza, więc będzie wysyłał pozycję `0` `+/-1` (czyli 4095, 0, 1 - więcej w sekcji [Uwagi](#uwagi))
 
