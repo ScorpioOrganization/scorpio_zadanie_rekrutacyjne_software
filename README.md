@@ -1,7 +1,6 @@
 # Projekt Scorpio - zadanie rekrutacyjne do działu Software
 
-Cześć! 
-Na repozytorium znajduje się paczka ROS zawierająca symulator silników z 	enkoderami absolutnymi. Repozytorium należy sklonować i zbudować paczkę w ROS. Po zbudowaniu paczki symulator można uruchomić komendą roslaunch virtual_dc_motor virtual_dc_motor.launch. Szczegóły działania paczki są opisane w pliku readme na repozytorium.
+Na repozytorium znajduje się paczka ROS zawierająca symulator silników z 	enkoderami absolutnymi.
 >**Uwaga!** Przed przystąpieniem do realizacji zadania przeczytaj **całe** README.
 ## Spis treści
 - [Zadania do wykonania](#zadania-do-wykonania)
@@ -14,11 +13,11 @@ Na repozytorium znajduje się paczka ROS zawierająca symulator silników z 	enk
 ## Zadania do wykonania 
 W tej części znajdziesz ogólny opis zadań, szczegółowy opis wraz ze specyfikacją techniczną znajdziesz w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
 
-Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko kodowania i znajomości algorytmów -  więc nawet w przypadku zrealizowania tylko części z poniższych punktów, zachęcamy do przesłania rozwiązania. Postępy w zadaniu powinny być udokumentowane w repozytorium na githubie (po każdym etapie zadania powinien zostać stworzony nowy commit).
+Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko programmowania i znajomości algorytmów -  więc nawet w przypadku zrealizowania tylko części z poniższych punktów, zachęcamy do przesłania rozwiązania. Postępy w zadaniu powinny być udokumentowane w repozytorium na githubie (po każdym etapie zadania powinien zostać stworzony nowy commit).
 
 > **Uwaga!** Kolejność wykonania zadań nie jest ważna
 
-1. W repozytorium, na którego stronie się właśnie najprawdopodobniej znajdujesz ([link](https://github.com/ScorpioOrganization/scorpio_zadanie_rekrutacyjne_software)) została przygotowana paczka ROS zawierająca napisany przez nas symulator silnika z enkoderem absolutnym. Repozytorium należy sklonować i zbudować paczkę w ROS. Szczegóły działania paczki są opisane w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
+1. W repozytorium została przygotowana paczka ROS zawierająca napisany przez nas symulator silnika z enkoderem absolutnym. Repozytorium należy sklonować i zbudować paczkę w ROS. Szczegóły działania paczki są opisane w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
 > **Wskazówka!** Dobrym rozwiązaniem jest "fork" paczki
 
 2. Stwórz prostą stronę internetową (z użyciem HTML, CSS, natywny JavaScript, oraz ewentualnego Reacta), która wyświetli aktualne pozycję wszystkich silników (są one do pobrania na ROSowych topicach `/virtual_dc_motor_node/get_position_0`, `/virtual_dc_motor_node/get_position_1`, `/virtual_dc_motor_node/get_position_2`) w postaci kąta z zakresu [0°;360°).
