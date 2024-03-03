@@ -25,15 +25,19 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko kodo
 
 > **Uwaga!** Silnik pierwotnie się nie rusza, więc będzie wysyłał pozycję `0` `+/-1` (czyli 4095, 0, 1 - więcej w sekcji [Uwagi](#uwagi))
 
+![Przykładowa wizualizacja pozycji silników](img/zad2.png)
+
 3. Do istniejącej aplikacji webowej dodaj możliwość sterowania każdym z silników za pomocą klawiszy (sterowanie przebiega poprzez publikowanie wartości z zakresu [-100;100] na jeden z topiców `/virtual_dc_motor_node/set_cs_0`, `/virtual_dc_motor_node/set_cs_1`, `/virtual_dc_motor_node/set_cs_2`). Pamiętaj, ażeby dodać przycisk pozwalający wyłączyć sterowanie (aplikacja ma przestać reagować na przyciskanie klawiszy), w celu uniknięcia przypadkowych ruchów silnikiem.
 
 > **Wskazówka!** Pamiętaj o regularnym commitowaniu zmian
 
 4. Dodaj suwak pozwalający na regulacje mocy w jej pełnym zakresie (wartości wysyłanej na topic).
 
+![Przykładowe dane sterujące i suwak](img/zad3-4.png)
+
 5. Wykonaj prostą wizualizację pozycji silników (patrz przykład poniżej).
 
-![Przykładowa wizualizacja pozycji silników](http://url/to/img.png)
+![Przykładowa wizualizacja pozycji silników](img/zad5.png)
 
 6. Do silnika z indeksem `0` jest podłączony silnik z indexem `1`, do któego z kolei jest podłączomy silnik z indexem `2` (silnik `3` posiada tyczkę do której nic nie jest przymocowane). Długości tych połączeń można pobrać z serwisu `/virtual_dc_motor_node/get_joints_length`. Pobierz te informacje i je wyświel w tabeli.
 
@@ -42,6 +46,8 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko kodo
 7. Uzależnij od siebie pozycję silników i zwizualizuj ją (silnik z indeksem `0` jest statyczny).
 
 8. Dodaj przycisk, który sprawi, iż powstała w ten sposób konstrukcja się wyprostuje (pozcyje wszystkich silników będą ustawione na `0`).
+
+![Przykładowa wizualizacja silników z uzależnionymi pozycjami](img/zad7-8.png)
 
 ## Specyfikacja techniczna zadania
 > **Uwaga!** Nie modyfikuj plików znajdujących się w paczce ROS.
