@@ -10,7 +10,7 @@ Na repozytorium znajduje się paczka ROS zawierająca symulator silników z 	enk
   - [Uwagi](#uwagi)
   - [Uruchamianie symulatora](#uruchamianie-symulatora)
 - [Wskazówki i przydatne linki](#wskazówki-i-przydatne-linki)
-- [Przydatne ROS'owe komendy CLI] (#przydatne-rosowe-komendy-cli)
+- [Przydatne ROSowe komendy CLI](#przydatne-rosowe-komendy-cli)
 ## Zadania do wykonania 
 W tej części znajdziesz ogólny opis zadań, szczegółowy opis wraz ze specyfikacją techniczną znajdziesz w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
 
