@@ -10,6 +10,7 @@ Na repozytorium znajduje się paczka ROS zawierająca symulator silników z 	enk
   - [Uwagi](#uwagi)
   - [Uruchamianie symulatora](#uruchamianie-symulatora)
 - [Wskazówki i przydatne linki](#wskazówki-i-przydatne-linki)
+- [Przydatne ROS'owe komendy CLI] (#przydatne-rosowe-komendy-cli)
 ## Zadania do wykonania 
 W tej części znajdziesz ogólny opis zadań, szczegółowy opis wraz ze specyfikacją techniczną znajdziesz w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
 
@@ -87,7 +88,7 @@ roslaunch virtual_dc_motor virtual_dc_motor.launch
 - Zadanie rekrutacyjne można oddać niepełne.
 - Rozwiązane zadanie należy umieścić w repozytorium (np. GitHub) i przesłać linka do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do 31.03.2024 do końca dnia.
 
-**Przydatne ROS'owe komendy CLI:** 
+## Przydatne ROSowe komendy CLI: 
 - rostopic list - zwraca liste wszystkich dostępnych topiców
 - rostopic echo <nazwa_topicu> - zwraca dane publikowane na topicu
 - rostopic info <nazwa_topicu> - zwraca informacje o topicu
