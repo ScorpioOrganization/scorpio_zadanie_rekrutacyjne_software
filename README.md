@@ -96,5 +96,6 @@ roslaunch virtual_dc_motor virtual_dc_motor.launch
 - rosservice list - zwraca liste wszystkich dostępnych serwisów
 - rosservice info <nazwa_serwisu> - zwraca informacje o serwisie
 - rosservice call <nazwa_serwisu> <typ_serwisu> <zawartość_requestu> - wywołuje serwis i zwraca odpowiedź wywołania
-- rosnode info <nazwa node'a> - zwraca informacje o node'dzie 
+- rosnode info <nazwa node'a> - zwraca informacje o node'dzie
+
 **Jeżeli będziesz miał jakiekolwiek wątpliwości i problemy z zadaniem śmiało skontaktuj się z nami na maila projekt@scorpio.pwr.edu.pl! :)**
