@@ -1,17 +1,21 @@
 #include "virtual_dc_motor.hpp"
 
-VirtualDCMotorNode::VirtualDCMotorNode() : loop_rate_(400),
+#include <virtual_dc_motor/getMotorJointsLengths.h>
+
+#define MOTOR_COUNT 3
+
+VirtualDCMotor::VirtualDCMotor(ros::NodeHandle& nh, std::shared_ptr<std::mt19937> random_number_generator, const std::string suffix) :
                                            cs_goal_(0),
                                            cs_real_(0),
                                            position_(0),
-                                           count_(0)
+                                           count_(0),
+                                           random_number_generator_(random_number_generator)
 {
-    nh_ = ros::NodeHandle("virtual_dc_motor");
-    set_cs_sub_ = nh_.subscribe("/virtual_dc_motor/set_cs", 10, &VirtualDCMotorNode::controlSignalCallback, this);
-    get_position_pub_ = nh_.advertise<std_msgs::UInt16>("/virtual_dc_motor/get_position", 10);
+    set_cs_sub_ = nh.subscribe("set_cs_" + suffix, 10, &VirtualDCMotor::controlSignalCallback, this);
+    get_position_pub_ = nh.advertise<std_msgs::UInt16>("get_position_" + suffix, 10);
 }
 
-void VirtualDCMotorNode::controlSignalCallback(const std_msgs::Int8::ConstPtr &msg)
+void VirtualDCMotor::controlSignalCallback(const std_msgs::Int8::ConstPtr &msg)
 {
     if (msg->data >= -100 && msg->data <= 100)
     {
@@ -19,65 +23,70 @@ void VirtualDCMotorNode::controlSignalCallback(const std_msgs::Int8::ConstPtr &m
     }
 }
 
-void VirtualDCMotorNode::run()
+void VirtualDCMotor::run()
 {
-    while (ros::ok())
+    simulateNonLinearMotorBehavior();
+    if (count_++ % 4 == 0)
     {
-        position_ += simulateNonLinearMotorBehavior(cs_goal_);
-        if (count_ % 4 == 0)
+        std_msgs::UInt16 position_msg;
+        uint8_t random_number = generateRandomNumber();
+        if (random_number < 30)
         {
-            std_msgs::UInt16 position_msg;
-            uint8_t random_number = generateRandomNumber();
-            if (random_number < 30)
-            {
-                position_msg.data = position_ - 1;
-            }
-            else if (random_number > 70)
-            {
-                position_msg.data = position_ + 1;
-            }
-            else
-            {
-                position_msg.data = position_;
-            }
-            if (position_msg.data >= 0)
-            {
-                position_msg.data = position_msg.data % 4096;
-            }
-            else
-            {
-                position_msg.data += 4095;
-            }
-            get_position_pub_.publish(position_msg);
+            position_msg.data = position_ - 1;
         }
-        count_++;
-        ros::spinOnce();
-        loop_rate_.sleep();
+        else if (random_number > 70)
+        {
+            position_msg.data = position_ + 1;
+        }
+        else
+        {
+            position_msg.data = position_;
+        }
+        position_msg.data %= 4096;
+        get_position_pub_.publish(position_msg);
     }
 }
 
-int16_t VirtualDCMotorNode::simulateNonLinearMotorBehavior(int8_t cs)
+void VirtualDCMotor::simulateNonLinearMotorBehavior()
 {
-    double k = 0.006;
-    if (cs >= 0)
-    {
-        return static_cast<int16_t>(k * cs * cs);
-    }
-    else
-    {
-        return -static_cast<int16_t>(k * cs * cs);
-    }
+    position_ += static_cast<int16_t>(0.006 * cs_goal_ * cs_goal_) * (cs_goal_ >= 0 ? 1 : -1);
 }
 
-uint8_t VirtualDCMotorNode::generateRandomNumber()
+uint8_t VirtualDCMotor::generateRandomNumber()
 {
-    return random_number_distribution_(random_number_generator_);
+    return random_number_distribution_(*random_number_generator_);
+}
+
+std::shared_ptr<std::mt19937> random_number_generator = std::make_shared<std::mt19937>(std::random_device()());
+
+bool motoConnectionServiceCallback(virtual_dc_motor::getMotorJointsLengths::Request&, virtual_dc_motor::getMotorJointsLengths::Response& res) {
+    res.data.clear();
+    std::uniform_int_distribution<uint8_t> random_number_distribution = std::uniform_int_distribution<uint8_t>(100, 200);
+    for(size_t i = 0; i < MOTOR_COUNT; ++i) {
+        res.data.push_back(random_number_distribution(*random_number_generator));
+    }
+    return true;
 }
 
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "virtual_dc_motor_node");
-    VirtualDCMotorNode node;
-    node.run();
+    ros::NodeHandle nh("virtual_dc_motor_node");
+
+    ros::ServiceServer motor_connection = nh.advertiseService("get_joints_length", motoConnectionServiceCallback);
+
+    std::vector<std::unique_ptr<VirtualDCMotor>> motors;
+    for(size_t i = 0; i < MOTOR_COUNT; ++i) {
+        motors.push_back(std::make_unique<VirtualDCMotor>(nh, random_number_generator, std::to_string(i)));
+    }
+
+    ros::Rate rate(40);
+    while(ros::ok()) {
+        for(std::unique_ptr<VirtualDCMotor>& motor : motors) {
+            motor->run();
+        }
+        ros::spinOnce();
+        rate.sleep();
+    }
     return 0;
 }
