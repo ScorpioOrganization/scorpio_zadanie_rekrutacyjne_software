@@ -66,8 +66,6 @@ Na topicu `/virtual_dc_motor_node/get_position_0`, `/virtual_dc_motor_node/get_p
 
 Node rozgłasza serwis `/virtual_dc_motor_node/get_joints_length`, który nie przyjmuje żadnych danych wejściowych, a jako odpowiedź zwraca tablicę uint16 o długości 3. Kolejne elementy odpowiadają długościom tyczek przymocowanych do silników o odpowiadającym im indeksie.
 
->**Uwaga** Serwis za każdym razem zwraca inne dane
-
 ### Uwagi:
  - Wartości podawane przez enkoder mają symulować rzeczywiste odczyty - zatem mogą się one wahać o `+/- 1`
  - Symulator stara się wiernie oddać zachowanie silnika, dlatego wartości sygnału sterującego bliskie zeru (|cs| < 13) nie zapewnią odpowiedniej mocy do wprawienia silnika w ruch.
@@ -89,4 +87,14 @@ roslaunch virtual_dc_motor virtual_dc_motor.launch
 - Zadanie rekrutacyjne można oddać niepełne.
 - Rozwiązane zadanie należy umieścić w repozytorium (np. GitHub) i przesłać linka do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do 31.03.2024 do końca dnia.
 
-**Jeżeli będziesz miał jakiekolwiek wątpliwości i problemy z zadaniem śmiało skontaktuj się z nami! :)**
+**Przydatne ROS'owe komendy CLI:** 
+- rostopic list - zwraca liste wszystkich dostępnych topiców
+- rostopic echo <nazwa_topicu> - zwraca dane publikowane na topicu
+- rostopic info <nazwa_topicu> - zwraca informacje o topicu
+- rostopic pub <nazwa_topicu> <typ_message'a> <zawartość_message'a> - publikuje dane na topic
+- rostopic hz <nazwa_topicu> - zwraca częstotliwość publikacji na topic
+- rosservice list - zwraca liste wszystkich dostępnych serwisów
+- rosservice info <nazwa_serwisu> - zwraca informacje o serwisie
+- rosservice call <nazwa_serwisu> <typ_serwisu> <zawartość_requestu> - wywołuje serwis i zwraca odpowiedź wywołania
+- rosnode info <nazwa node'a> - zwraca informacje o node'dzie 
+**Jeżeli będziesz miał jakiekolwiek wątpliwości i problemy z zadaniem śmiało skontaktuj się z nami na maila projekt@scorpio.pwr.edu.pl! :)**
