@@ -63,7 +63,7 @@ Topic ma własny typ RoverMove - jego szczegóły można znaleźć w `msg/RoverM
 Na topic `/rover/pose` publikowane są dane o obecnej pozycji łazika - zawiera 3 pola (wszystkie są 8-bitowymi danymi całkowitoliczbowymi - Int8):
 - x: pozycja x na mapie
 - y: pozycja x na mapie
-- orientation: 1-północ, 2-wschód, 3-południe, 4-zachód
+- orientation: 0-północ, 1-wschód, 2-południe, 3-zachód
 
 Dodatkowo jeżeli łazik znajdzie się w pozycji niedozwolonej (w przeszkodzie, na którą nie powinien wjechać lub poza mapą) to wszystkie pola będą miały wartość -1, a łazik nie będzie przyjmować już wtedy poleceń ruchu. W takiej sytuacji należy zrestartować symulację i spróbować wykonać przejazd ponownie. Pozycja jest publikowana 10 razy na sekundę.
 Topic ma własny typ RoverPose - jego szczegóły można znaleźć w `msg/RoverPose.msg`
