@@ -21,7 +21,7 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
 1. W repozytorium została przygotowana paczka ROS zawierająca napisaną przez nas symulacją jazdy autonomicznej łazika. Repozytorium należy sklonować i zbudować paczkę w ROS. Szczegóły działania paczki są opisane w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
 > **Wskazówka!** Dobrym rozwiązaniem jest "fork" paczki
 
-2. Stwórz node ROSowy, który zaplanuje ścieżkę (jak najszybszą) dojazdu do zadanego na topic `/set_goal` punktu mapy (x,y), a następnie dojedzie do danego punktu poprzez zadawanie odpowiednich komend ruchu na topic `/rover/move`.
+2. Stwórz node ROSowy, który zaplanuje ścieżkę (jak najszybszą) dojazdu do zadanego na topic `/set_goal` punktu mapy (x,y), a następnie dojedzie do danego punktu poprzez zadawanie odpowiednich komend ruchu na topic `/rover/move`. Node ma subskrybować topic `/set_goal` który ma własny typ SetGoal zawierający koordynaty x i y w postaci dodatnich liczb całkowitych (UInt8). Cel może być zadawany w terminalu za pomocą komendy `rostopic pub`
 
 > **Uwaga!** tutaj przyjmujemy, że teren, po którym porusza się łazik jest płaski i nie ma na nim żadnych przeszkód (mapa jest pusta). Ważnym jest jednak, aby łazik nie wyjechał poza teren mapy - więcej w sekcji [Uwagi](#uwagi))
 
@@ -35,7 +35,7 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
 
 ## Specyfikacja techniczna zadania
 > **Uwaga!** Nie modyfikuj plików utworzonych przez nas znajdujących się w paczce ROS.
-### Dane ogólne
+### Informacje ogólne
 
 Łazik porusza się po mapie 50x50 zawsze zaczynając w pozycji (0,0) - lewy dolny róg mapy. Punkt (0,0) zawsze znajduje się na wysokości 0. Na początku łazik zawsze zorientowany jest na północ.
 
@@ -79,7 +79,7 @@ Do zadania 3 node na topic `/rover/sensor` będą wysyłane 10 razy na sekundę 
 ![Wizualizacja danych z sensora](img/zad3_sensor.png)
 
 ### Uruchamianie symulatora
-Po zbudowaniu paczki symulator silnika można uruchomić dzięki launchfile za pomocą komendy:
+Po zbudowaniu paczki symulator można uruchomić dzięki launchfile za pomocą komendy:
 ```bash
 roslaunch autonomy_simulation autonomy_simulation.launch
 ```
