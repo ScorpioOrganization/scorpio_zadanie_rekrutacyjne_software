@@ -64,6 +64,7 @@ Na topic `/rover/pose` publikowane są dane o obecnej pozycji łazika - zawiera 
 - x: pozycja x na mapie
 - y: pozycja x na mapie
 - orientation: 1-północ, 2-wschód, 3-południe, 4-zachód
+
 Dodatkowo jeżeli łazik znajdzie się w pozycji niedozwolonej (w przeszkodzie, na którą nie powinien wjechać lub poza mapą) to wszystkie pola będą miały wartość -1, a łazik nie będzie przyjmować już wtedy poleceń ruchu. W takiej sytuacji należy zrestartować symulację i spróbować wykonać przejazd ponownie. Pozycja jest publikowana 10 razy na sekundę.
 Topic ma własny typ RoverPose - jego szczegóły można znaleźć w `msg/RoverPose.msg`
 
