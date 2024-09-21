@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>virtual_dc_motor</name>
+  <name>autonomy_simulator</name>
   <description>Scorpio recruitment task</description>
   <version>1.0.0</version>
   <maintainer email="projekt@scorpio.pwr.edu.pl">projekt_scorpio</maintainer>
