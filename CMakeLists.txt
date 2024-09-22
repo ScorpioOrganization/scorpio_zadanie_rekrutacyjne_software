@@ -47,4 +47,8 @@ add_executable(autonomy_simulator
 
 add_dependencies(autonomy_simulator ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-target_link_libraries(autonomy_simulator ${catkin_LIBRARIES})
+add_library(map_generation src/map_generation.cpp)
+
+target_link_libraries(autonomy_simulator ${catkin_LIBRARIES} map_generation)
+
+add_subdirectory(test)
