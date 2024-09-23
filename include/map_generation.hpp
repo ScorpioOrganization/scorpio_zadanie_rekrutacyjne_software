@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include <string>
-#include <optional>
 #include <random>
 
 namespace map_generation
@@ -17,14 +16,14 @@ const int maxTerrainObstacleHeight = 50;
 
 struct Map {
     private:
-    std::vector<std::vector<int>> map;
+    std::vector<std::vector<int8_t>> map;
     size_type mapSize;
     std::mt19937 gen;
 
     public:
     Map(size_type mapSize);
-    std::vector<std::vector<int>> getMap() const {return map;}
-    std::optional<int> getTile(int row, int col) const; 
+    std::vector<std::vector<int8_t>> getMap() const {return map;}
+    int8_t getTile(int row, int col) const; 
     void setTile(int row, int col, int val);
     size_type getMapSize() const noexcept {return mapSize;}
     std::string toString() const noexcept;

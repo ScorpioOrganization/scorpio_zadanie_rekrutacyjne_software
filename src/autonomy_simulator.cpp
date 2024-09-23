@@ -6,6 +6,7 @@
 #include "autonomy_simulator/RoverPose.h"
 #include "autonomy_simulator/RoverMap.h"
 #include "autonomy_simulator/GetMap.h"
+#include "map_generation.hpp"
 #include "utils.hpp"
 
 #define GRID_SIZE 50
@@ -47,7 +48,7 @@ void AutonomySimulator::roverMapCallback(const ros::TimerEvent&) {
     msg.data.clear();
     for(const auto &delta : sensorFOV) {
         const auto deltaInDir = deltaInDirection(delta, _roverPoseR);
-        int8_t val = -1;
+        int8_t val = -128;
         const std::pair<int8_t, int8_t> fieldPos = { _roverPoseX + deltaInDir.first, _roverPoseY + deltaInDir.second };
         if(fieldPos.first >= 0 && fieldPos.first < GRID_SIZE
         && fieldPos.second >= 0 && fieldPos.second < GRID_SIZE) {
@@ -98,7 +99,7 @@ AutonomySimulator::AutonomySimulator():
         std::bind(&AutonomySimulator::roverPoseCallback, this, std::placeholders::_1),
         false,
         false)),
-    _map(generateMap(GRID_SIZE)),
+    _map(map_generation::genrateRandomMap(GRID_SIZE).getMap()),
     _getMapService(_nh.advertiseService("/get_map", &AutonomySimulator::getMapServiceCallback, this)),
     _roverMapPublisher(_nh.advertise<autonomy_simulator::RoverMap>("/rover/sensor", 1)),
     _roverMapPublisherTimer(_nh.createTimer(

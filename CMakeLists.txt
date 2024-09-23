@@ -42,7 +42,7 @@ include_directories(
 add_executable(autonomy_simulator
   src/main.cpp
   src/autonomy_simulator.cpp
-  src/utils.cpp
+  src/map_generation.cpp
 )
 
 add_dependencies(autonomy_simulator ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})

@@ -4,7 +4,6 @@
 #include <sstream>
 #include <iomanip>
 #include <random>
-#include <optional>
 #include <functional>
 
 namespace map_generation
@@ -79,11 +78,11 @@ namespace map_generation
         return ss.str();
     }
 
-    std::optional<int> Map::getTile(int row, int col) const {
+    int8_t Map::getTile(int row, int col) const {
         if(row < mapSize and col < mapSize and row >= 0 and col >= 0) {
-            return std::optional<int>(map[row][col]);
+            return map[row][col];
         }
-        return std::optional<int>();
+        return -128;
     }
 
     void Map::setTile(int row, int col, int val) {
@@ -95,9 +94,9 @@ namespace map_generation
     Map::Map(size_type mapSize)
     {
         this->mapSize = mapSize;
-        map = std::vector<std::vector<int>>(mapSize);
+        map = std::vector<std::vector<int8_t>>(mapSize);
         for(auto& row : map) {
-            row = std::vector<int>(mapSize);
+            row = std::vector<int8_t>(mapSize);
         }
     }
 

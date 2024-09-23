@@ -17,7 +17,7 @@ bool checkPredicate(const Map& map, std::function<bool(const Map&, int, int)> f)
 
 TEST(MapGenerationTests, generateMapDebug) {
     auto map = genrateRandomMap(20);
-    EXPECT_EQ(map.getTile(0,0).value(), 0);
+    EXPECT_EQ(map.getTile(0,0), 0);
     std::cout << map.toString() << std::endl;
 }
 
@@ -31,9 +31,9 @@ TEST(MapGenerationTests, setFunction) {
 TEST(MapGenerationTests, getFunction)
 {
     auto map = Map(5);
-    EXPECT_TRUE(static_cast<bool>(map.getTile(1,2)));
-    EXPECT_EQ(map.getTile(1,2).value(), 0);
-    EXPECT_FALSE(static_cast<bool>(map.getTile(-1,0)));
+    EXPECT_EQ(map.getTile(1,2), -128);
+    EXPECT_EQ(map.getTile(1,2), 0);
+    EXPECT_EQ(map.getTile(-1,0), -128);
 }
 
 TEST(MapGenerationTests, noiseGeneration)
@@ -41,7 +41,7 @@ TEST(MapGenerationTests, noiseGeneration)
     auto map = Map(10);
     addFloorNoiseToMap(map);
     const auto isOnlyNoise = [](const Map& map, int row, int col){
-        return map.getTile(row, col).value() <= 10 ? true : false;
+        return map.getTile(row, col) <= 10 ? true : false;
     };
     EXPECT_TRUE(checkPredicate(map, isOnlyNoise));
 }
