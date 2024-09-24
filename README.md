@@ -21,7 +21,7 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
 1. W repozytorium została przygotowana paczka ROS zawierająca napisaną przez nas symulacją jazdy autonomicznej łazika. Repozytorium należy sklonować i zbudować paczkę w ROS. Szczegóły działania paczki są opisane w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
 > **Wskazówka!** Dobrym rozwiązaniem jest "fork" paczki
 
-2. Stwórz node ROSowy, który zaplanuje ścieżkę (jak najszybszą) dojazdu do zadanego na topic `/set_goal` punktu mapy (x,y), a następnie dojedzie do danego punktu poprzez zadawanie odpowiednich komend ruchu na topic `/rover/move`. Node ma subskrybować topic `/set_goal` który ma własny typ SetGoal zawierający koordynaty x i y w postaci dodatnich liczb całkowitych (UInt8). Cel może być zadawany w terminalu za pomocą komendy `rostopic pub`
+2. Stwórz node ROSowy, który zaplanuje ścieżkę (optymalną) dojazdu do zadanego na topic `/set_goal` punktu mapy (x,y), a następnie dojedzie do danego punktu poprzez zadawanie odpowiednich komend ruchu na topic `/rover/move`. Node ma subskrybować topic `/set_goal` który ma własny typ SetGoal zawierający koordynaty x i y w postaci dodatnich liczb całkowitych (UInt8). Cel może być zadawany w terminalu za pomocą komendy `rostopic pub`
 
 > **Uwaga!** tutaj przyjmujemy, że teren, po którym porusza się łazik jest płaski i nie ma na nim żadnych przeszkód (mapa jest pusta). Ważnym jest jednak, aby łazik nie wyjechał poza teren mapy - więcej w sekcji [Uwagi](#uwagi))
 
@@ -39,13 +39,13 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
 
 Łazik porusza się po mapie 50x50 zawsze zaczynając w pozycji (0,0) - lewy dolny róg mapy. Punkt (0,0) zawsze znajduje się na wysokości 0. Na początku łazik zawsze zorientowany jest na północ.
 
-Komórki mapy wysokości, po której łazik porusza się w zadaniach 2 i 3 zawierają wartości liczbowe ze zbioru (0,10,20,30,40,50,100) - jest to odwzorowanie nierównego terenu, po którym łazik się przemieszcza. Łazik może przy jednym ruchu maksymalnie zmienić wysokość o 10 np:
+Komórki mapy wysokości, po której łazik porusza się w zadaniach 3 i 4 zawierają wartości liczbowe ze zbioru (0,10,20,30,40,50,100) - jest to odwzorowanie nierównego terenu, po którym łazik się przemieszcza. Łazik może przy jednym ruchu maksymalnie zmienić wysokość o 10 np:
 - będąc na komórce o wysokości 10 może wjechać na komórkę o wysokości 0, 10 lub 20
 - będąć w komórce o wysokości 0 może wjechać na komórkę o wysokości 0 lub 10
 - będąc w komórce o wysokości 50 może wjechać na komórkę o wysokości 50 lub 40 (nie 30, 20, 10 ani 0)
 - łazik nigdy nie może wjechać na komórkę o wysokości 100
 
-W zadaniu 3 należy w pamięci przechowywać własną mapę i publikować ją na topic `/rover/map`. Na topic należy publikować tablicę **jednowymiarową** ośmiobitowych liczb całkowitych (Int8). Do tego należy wykorzystać stworzony przez nas własny typ wiadomości ROSowej - RoverMap. Tablicę należy uzupełnić w sposób identyczny do mapy pozyskiwanej za pomocą serwisu `/get_map` opisanego poniżej.
+W zadaniu 4 należy w pamięci przechowywać własną mapę i publikować ją na topic `/rover/map`. Na topic należy publikować tablicę **jednowymiarową** ośmiobitowych liczb całkowitych (Int8). Do tego należy wykorzystać stworzony przez nas własny typ wiadomości ROSowej - RoverMap. Tablicę należy uzupełnić w sposób identyczny do mapy pozyskiwanej za pomocą serwisu `/get_map` opisanego poniżej.
 
 **Nazwa paczki ROS** - `autonomy_simulation`  
 
@@ -57,25 +57,26 @@ Node `autonomy_simulation` subskrybuje dane z topicu `/rover/move`. Jest to kome
 - 1: obrót łazika w miejscu w prawo o 90 stopni
 - 2: jazda do przodu
 - 3: jazda do tyłu
+
 Topic ma własny typ RoverMove - jego szczegóły można znaleźć w `msg/RoverMove.msg`
 **Na topic `/rover/move` nie należy wysyłać danych częściej niż 10 razy na sekundę**
 
 Na topic `/rover/pose` publikowane są dane o obecnej pozycji łazika - zawiera 3 pola (wszystkie są 8-bitowymi danymi całkowitoliczbowymi - Int8):
 - x: pozycja x na mapie
-- y: pozycja x na mapie
+- y: pozycja y na mapie
 - orientation: 0-północ, 1-wschód, 2-południe, 3-zachód
 
 Dodatkowo jeżeli łazik znajdzie się w pozycji niedozwolonej (w przeszkodzie, na którą nie powinien wjechać lub poza mapą) to wszystkie pola będą miały wartość -1, a łazik nie będzie przyjmować już wtedy poleceń ruchu. W takiej sytuacji należy zrestartować symulację i spróbować wykonać przejazd ponownie. Pozycja jest publikowana 10 razy na sekundę.
 Topic ma własny typ RoverPose - jego szczegóły można znaleźć w `msg/RoverPose.msg`
 
-Node rozgłasza serwis `/get_map`, który pozwala pobrać mapę terenu wymaganą do zadania 2. Informacje zwracane przez mapę są w postaci tablicy **jednowymiarowej** ośmiobitowych liczb całkowitych (Int8). Każdy rząd w tej tablicy jest wypisany po kolei. To oznacza że:
+Node rozgłasza serwis `/get_map`, który pozwala pobrać mapę terenu wymaganą do zadania 3. Informacje zwracane przez mapę są w postaci tablicy **jednowymiarowej** ośmiobitowych liczb całkowitych (Int8). Każdy rząd w tej tablicy jest wypisany po kolei. To oznacza że:
 - komórka (0,0) będzie się znajdować na pierwszym miejscu tablicy (indeks 0)
 - komórka (0,1) będzie się znajdować na drugim miejscu tablicy (indeks 1)
 - komórka (1,0) będzie się znajdować na pięćdziesiątym pierwszym miejscu tablicy (indeks 50)
 - w sumie tablica będzie miała 2500 pól, gdzie ostatnie (o indeksie 2499) będzie oznaczać pole (50,50)
 Serwis ma własny typ GetMap - jego szczegóły można znaleźć w `srv/GetMap.srv`
 
-Do zadania 3 node na topic `/rover/sensor` będą wysyłane 10 razy na sekundę informacje o terenie przed łazikiem (3x2 komórki). Topic ma własny typ RoverMap - jego szczegóły można znaleźć w `msg/RoverMap.msg`. Jest on efektywnie małą mapą widzianą przed łazikiem i czytana jest podobnie jak wcześniej opisane mapy. Należy jednak pamiętać, że pokrycie danych z czujnika z mapą rzeczywistą będzie zależeć od rotacji. Indeksy komórek publikowanej przez sensor tablicy jednowymiarowej w zależności od rotacji łazika wizualizuje poniższy rysunek (X to pozycja łazika):
+Do zadania 4 node na topic `/rover/sensor` będą wysyłane 10 razy na sekundę informacje o terenie przed łazikiem (3x2 komórki). Topic ma własny typ RoverMap - jego szczegóły można znaleźć w `msg/RoverMap.msg`. Jest on efektywnie małą mapą widzianą przed łazikiem i czytana jest podobnie jak wcześniej opisane mapy. Należy jednak pamiętać, że pokrycie danych z czujnika z mapą rzeczywistą będzie zależeć od rotacji. Indeksy komórek publikowanej przez sensor tablicy jednowymiarowej w zależności od rotacji łazika wizualizuje poniższy rysunek (X to pozycja łazika):
 
 ![Wizualizacja danych z sensora](img/zad3_sensor.png)
 
