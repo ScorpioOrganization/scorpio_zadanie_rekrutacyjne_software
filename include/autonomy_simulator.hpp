@@ -12,6 +12,7 @@
 
 class AutonomySimulator {
     ros::NodeHandle _nh;
+    bool _generateObstacles;
 
     // Simulation
     int8_t _roverPoseX;

@@ -31,9 +31,9 @@ TEST(MapGenerationTests, setFunction) {
 TEST(MapGenerationTests, getFunction)
 {
     auto map = Map(5);
-    EXPECT_EQ(map.getTile(1,2), -128);
+    EXPECT_EQ(map.getTile(1,2), 100);
     EXPECT_EQ(map.getTile(1,2), 0);
-    EXPECT_EQ(map.getTile(-1,0), -128);
+    EXPECT_EQ(map.getTile(-1,0), 100);
 }
 
 TEST(MapGenerationTests, noiseGeneration)

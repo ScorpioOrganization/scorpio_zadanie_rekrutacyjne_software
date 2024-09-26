@@ -82,7 +82,7 @@ namespace map_generation
         if(row < mapSize and col < mapSize and row >= 0 and col >= 0) {
             return map[row][col];
         }
-        return -128;
+        return 100;
     }
 
     void Map::setTile(int row, int col, int val) {

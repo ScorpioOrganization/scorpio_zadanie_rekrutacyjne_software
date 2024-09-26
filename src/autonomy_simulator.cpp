@@ -33,7 +33,7 @@ bool AutonomySimulator::getMapServiceCallback(
         return false;
     }
     response.data.clear();
-    std::for_each(_map.begin(), _map.end(), [&](std::vector<int8_t> row) {
+    std::for_each(_map.begin(), _map.end(), [&](const std::vector<int8_t> &row) {
         response.data.insert(response.data.end(), row.begin(), row.end());
     });
     return true;
@@ -48,7 +48,7 @@ void AutonomySimulator::roverMapCallback(const ros::TimerEvent&) {
     msg.data.clear();
     for(const auto &delta : sensorFOV) {
         const auto deltaInDir = deltaInDirection(delta, _roverPoseR);
-        int8_t val = -128;
+        int8_t val = 100;
         const std::pair<int8_t, int8_t> fieldPos = { _roverPoseX + deltaInDir.first, _roverPoseY + deltaInDir.second };
         if(fieldPos.first >= 0 && fieldPos.first < GRID_SIZE
         && fieldPos.second >= 0 && fieldPos.second < GRID_SIZE) {
@@ -89,6 +89,7 @@ void AutonomySimulator::roverMoveCallback(const std_msgs::UInt8& move) {
 
 AutonomySimulator::AutonomySimulator():
     _nh(ros::NodeHandle("autonomy_simulator")),
+    _generateObstacles(_nh.param(std::string("generate_obstacles"), false)),
     _roverPoseX(0),
     _roverPoseY(0),
     _roverPoseR(autonomy_simulator::RoverPose::ORIENTATION_NORTH),
@@ -99,18 +100,26 @@ AutonomySimulator::AutonomySimulator():
         std::bind(&AutonomySimulator::roverPoseCallback, this, std::placeholders::_1),
         false,
         false)),
-    _map(map_generation::genrateRandomMap(GRID_SIZE).getMap()),
-    _getMapService(_nh.advertiseService("/get_map", &AutonomySimulator::getMapServiceCallback, this)),
-    _roverMapPublisher(_nh.advertise<autonomy_simulator::RoverMap>("/rover/sensor", 1)),
-    _roverMapPublisherTimer(_nh.createTimer(
-        ros::Duration(0.1),
-        std::bind(&AutonomySimulator::roverMapCallback, this, std::placeholders::_1),
-        false,
-        false)),
-    _roverMoveSubscriber(_nh.subscribe("/rover/move", 1, &AutonomySimulator::roverMoveCallback, this)) { }
+    _roverMoveSubscriber(_nh.subscribe("/rover/move", 1, &AutonomySimulator::roverMoveCallback, this)) {
+        if(_generateObstacles) {
+            _map = map_generation::genrateRandomMap(GRID_SIZE).getMap();
+            _getMapService = _nh.advertiseService("/get_map", &AutonomySimulator::getMapServiceCallback, this);
+            _roverMapPublisher = _nh.advertise<autonomy_simulator::RoverMap>("/rover/sensor", 1);
+            _roverMapPublisherTimer = _nh.createTimer(
+                ros::Duration(0.1),
+                std::bind(&AutonomySimulator::roverMapCallback, this, std::placeholders::_1),
+                false,
+                false);
+        }
+        else {
+            _map = std::vector<std::vector<int8_t>>(GRID_SIZE, std::vector<int8_t>(GRID_SIZE, 0));
+        }
+    }
 
 void AutonomySimulator::start() {
     _roverPosePublisherTimer.start();
-    _roverMapPublisherTimer.start();
+    if(_generateObstacles) {
+        _roverMapPublisherTimer.start();
+    }
     ros::spin();
 }
