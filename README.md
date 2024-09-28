@@ -24,6 +24,8 @@ Mapa wysokości jest losowo generowana przy każdorazowym uruchomieniu symulacji
 
 W zadaniu 2 przyjmujemy, że każda komórka mapy ma wysokość 0 - łazik może bez problemu wjechać na dowolną jej komórke, należy jednak pamiętać, że łazik nie może wyjechać poza mapę.
 
+Całość zadania należy wykonać używając frameworku Robot Operating System, a kod może być w C++ lub Python.
+
 ## Zadania do wykonania 
 W tej części znajdziesz ogólny opis zadań, szczegółowy opis wraz ze specyfikacją techniczną znajdziesz w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
 
@@ -32,7 +34,7 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
 1. Instalacja ROS i budowanie paczki z symulacją
 - W repozytorium została przygotowana paczka ROS zawierająca napisaną przez nas symulacją jazdy autonomicznej łazika. Repozytorium należy sklonować i zbudować paczkę w ROS. Szczegóły działania paczki są opisane w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
 
-> **Wskazówka!** Dobrym rozwiązaniem jest "fork" paczki
+> **Wskazówka!** Dobrym rozwiązaniem jest "fork" tego repozytorium
 
 2. Stworzenie node'a ROSowego do autonomicznego przejazdu po płaskim terenie:
 - Node subskrybuje topic `/set_goal`, na który wysyłane są informacje o pozycji, do której łazik ma autonomicznie dojechać.
