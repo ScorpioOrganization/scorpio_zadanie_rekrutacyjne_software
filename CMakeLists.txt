@@ -18,6 +18,7 @@ add_message_files(
   FILES
   RoverMap.msg
   RoverPose.msg
+  SetGoal.msg
 )
 
 ## Generate added messages and services with any dependencies listed here
