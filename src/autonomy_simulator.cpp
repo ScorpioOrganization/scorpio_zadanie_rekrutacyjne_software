@@ -52,7 +52,7 @@ void AutonomySimulator::roverMapCallback(const ros::TimerEvent&) {
         const std::pair<int8_t, int8_t> fieldPos = { _roverPoseX + deltaInDir.first, _roverPoseY + deltaInDir.second };
         if(fieldPos.first >= 0 && fieldPos.first < GRID_SIZE
         && fieldPos.second >= 0 && fieldPos.second < GRID_SIZE) {
-            val = _map[fieldPos.second][fieldPos.first];
+            val = _map[fieldPos.second][fieldPos.first] - _map[_roverPoseY][_roverPoseX];
         }
         msg.data.push_back(val);
     }
