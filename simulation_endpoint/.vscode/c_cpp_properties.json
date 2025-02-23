@@ -1,0 +1,30 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/lucas/ros2_ws/install/zed_interfaces/include/**",
+        "/home/lucas/ros2_ws/install/scorpio_rviz_plugins/include/**",
+        "/home/lucas/ros2_ws/install/scorpio_interfaces/include/**",
+        "/home/lucas/ros2_ws/install/scorpio_hardware/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/lucas/ros2_ws/src/autonomy/include/**",
+        "/home/lucas/ros2_ws/src/core/control/include/**",
+        "/home/lucas/ros2_ws/src/core/image_processing/include/**",
+        "/home/lucas/ros2_ws/src/core/inverse_kimenatics/scorpio_hardware/include/**",
+        "/home/lucas/ros2_ws/src/core/scorpio_rviz_plugins/include/**",
+        "/home/lucas/ros2_ws/src/core/tools/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
