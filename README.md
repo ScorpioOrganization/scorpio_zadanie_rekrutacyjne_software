@@ -27,7 +27,7 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
 1. **Instalacja ROS2 i budowanie paczki do połączenia z symulacją:**
 - W repozytorium została przygotowana paczka ROS2 zawierająca narzędzie umożliwiąjące podłączenie symulacji z ROSem. Repozytorium należy sklonować i zbudować paczkę w ROS2. Szczegóły działania paczki są opisane w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
 
-> **Wskazówka!** Dobrym rozwiązaniem jest "fork" tego repozytorium
+> **ka!** Dobrym rozwiązaniem jest "fork" tego repozytorium
 
 2. **Stworzenie node'a ROSowego do sterowania łazikiem:**
 - Celem jest stworzenie node'a, który umożliwia sterowanie prędkością łazika.
@@ -81,7 +81,7 @@ Topic'i te są odpowiedzialne za odczyt prędkości obrotowej poszczególnych k�
 - `/wheel_rr/get_velocity` - prawe tylne koło
 
 Mają być subskrybowane przez node'y realizujące zadanie 2. Ich typ wiadomości to Float32 (std_msgs/msg/Float32).
-Wartością wiadomości jest prędkość obrotowa w rad/s. Wartość dodatnia oznacza ruch zgodny z ruchem wskazówek zegara, a ujemna przeciwny.
+Wartością wiadomości jest prędkość obrotowa koła w rad/s. Wartość dodatnia oznacza ruch do przodu względem łazika, a ujemna do tyłu.
 
 #### 3. Topic `/cmd_vel`
 
