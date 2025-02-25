@@ -122,7 +122,7 @@ Położenie sensorów na łaziku i ich zasięg przedstawia poniższy rysunek
 
 #### 5. Serwis `/enable_autonomy` 
    
-Serwis jest odpowiedzialny za włączenie i wyłączenie autonomicznego przejazdu łazika. Ich typ to SetBool (std_srvs/srv/SetBool).
+Serwis jest odpowiedzialny za włączenie i wyłączenie autonomicznego przejazdu łazika. Jego typem powinien być SetBool (std_srvs/srv/SetBool).
 Wartość `true` powinna włączyć autonomiczny przejazd, a `false` wyłączyć.
 Serwis powinien być obsługiwany przez node z zadania 3.
 
