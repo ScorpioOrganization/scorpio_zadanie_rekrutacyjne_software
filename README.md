@@ -89,13 +89,13 @@ Położenie sensorów na łaziku i ich zasięg przedstawia poniższy rysunek
 #### 3. Serwis `/enable_autonomy` i `/disable_autonomy`
    
 Serwisy te są odpowiedzialne za włączenie i wyłączenie autonomicznego przejazdu łazika. Ich typ wiadomości to Empty (std_msgs/msg/Empty).
-Powinny być realizowane przez node z zadania 4.
+Powinny być obsługiwane przez node z zadania 3.
 Po wywołaniu serwisu `/enable_autonomy` node powinien rozpocząć autonomiczny przejazd, a po wywołaniu serwisu `/disable_autonomy` node powinien zatrzymać łazik.
 
 #### 4. Topic `/camera/image`
 
 Topic ten jest odpowiedzialny za przesyłanie obrazu z kamery umieszczonej na maszcie łazika.
-Musi być subskrybowany przez node realizujący zadanie 3. Jego typ wiadomości to Image (sensor_msgs/msg/Image). Właściwości obrazu:
+Musi być subskrybowany przez node realizujący zadanie 4. Jego typ wiadomości to Image (sensor_msgs/msg/Image). Właściwości obrazu:
 - Format: RGBA8
 - Rozdzielczość: 720x480
 - Częstotliwość: 30Hz
@@ -119,7 +119,7 @@ ros2 launch simulation_endpoint endpoint.launch.py
 - Do ręcznego wysłania danych na topic w ROS możesz użyć komendy `ros2 topic pub <nazwa_topicu> <typ_danych> <dane>` (po wpisaniu nazwy topicu dobrze jest od razu użyć TAB aby powłoka pomogła w wpisywaniu i zajęła się typem danych i formatem). Możesz to wykorzystać do weryfikacji działania topic'ów z symulacji oraz swoich node'ów.
 - Możesz użyć komendy `ros2 topic echo <nazwa_topicu>` aby wyświetlić dane wysyłane na określony topic.
 - Zadanie rekrutacyjne można oddać niepełne.
-- Rozwiązane zadanie należy umieścić w **publicznym** repozytorium (np. GitHub) i przesłać linka do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do XX.02.2025 do końca dnia.
+- Rozwiązane zadanie należy umieścić w **publicznym** repozytorium (np. GitHub) i przesłać linka do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do XX.XX.2025 do końca dnia.
 
 ## Przydatne ROSowe komendy CLI: 
 - ros2 topic list - zwraca liste wszystkich dostępnych topiców
