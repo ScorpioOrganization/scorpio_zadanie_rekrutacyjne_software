@@ -17,7 +17,7 @@ Zadanie wykorzystuje trójwymiarową symulację łazika marsjańskiego, w które
 Łazik znajduje się w zamkniętej tubie o szerokości ~3.5m. Wewnątrz tuby znajduje się zdjęcie z jaskrawą, czerwoną ramką.
 Zdjęcie jest losowo umieszczane w tubie przy uruchomieniu symulacji.
 
-Całość zadania należy wykonać używając frameworku Robot Operating System 2, a kod może być napisany w C++.
+Całość zadania należy wykonać używając frameworku Robot Operating System 2, a kod powinien być napisany w C++.
 
 ## Zadania do wykonania 
 W tej części znajdziesz ogólny opis zadań, szczegółowy opis wraz ze specyfikacją techniczną znajdziesz w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
@@ -25,20 +25,20 @@ W tej części znajdziesz ogólny opis zadań, szczegółowy opis wraz ze specyf
 Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko programowania i znajomości algorytmów -  więc nawet w przypadku zrealizowania tylko części z poniższych punktów, zachęcamy do przesłania rozwiązania. Postępy w zadaniu powinny być udokumentowane w repozytorium na githubie (po każdym etapie zadania powinien zostać stworzony nowy commit).
 
 1. **Instalacja ROS2 i budowanie paczki do połączenia z symulacją:**
-- W repozytorium została przygotowana paczka ROS2 zawierająca narzędzie umożliwiąjące podłączenie symulacji z ROSem. Repozytorium należy sklonować i zbudować paczkę w ROS2. Szczegóły działania paczki są opisane w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
+- W repozytorium została przygotowana paczka ROS2 zawierająca narzędzie umożliwiąjące podłączenie symulacji do ROS2. Repozytorium należy sklonować i zbudować paczkę w ROS2. Szczegóły działania paczki są opisane w sekcji [specyfikacja techniczna zadania](#specyfikacja-techniczna-zadania).
 
-> **ka!** Dobrym rozwiązaniem jest "fork" tego repozytorium
+> **Wskazówka!** Dobrym rozwiązaniem jest "fork" tego repozytorium
 
 2. **Stworzenie node'a ROSowego do sterowania łazikiem:**
 - Celem jest stworzenie node'a, który umożliwia sterowanie prędkością łazika.
-- Node subskrybuje prędkości obrotowe kół z topic'ów `/wheel_XX/get_velocity`, gdzie XX to oznaczenie koła (`LF`, `RF`, `LR`, `RR`)
+- Node subskrybuje prędkości obrotowe kół z topic'ów `/wheel_XX/get_velocity`, gdzie XX to oznaczenie koła (`lf`, `rf`, `lr`, `rr`)
 - Node subskrybuje komendy sterujące z topicu `/cmd_vel` i generuje odpowiednie moce dla każdego z silników, aby osiągnąć zadaną prędkość łazika z tego topicu.
-- Node publikuje dane na topic'i `/wheel_XX/set_effort`, gdzie XX to oznaczenie koła (`LF`, `RF`, `LR`, `RR`), a dane to moc (sygnał PWM) podawana na silnik koła.
+- Node publikuje dane na topic'i `/wheel_XX/set_effort`, gdzie XX to oznaczenie koła (`lf`, `rf`, `lr`, `rr`), a dane to moc (sygnał PWM) podawana na silnik koła.
 
 3. **Stworzenie node'a do autonomicznego przejazdu przez tubę:**
-- Node subskrybuje topic'i `/sensor/left` i `/sensor/right` zawierające odczyty z czujników odległościowych znajdujących się po lewej i prawej stronie łazika.
+- Node subskrybuje topic'i `/sensor/left` i `/sensor/right` zawierające odczyty z czujników odległości znajdujących się z przodu po lewej i prawej stronie łazika.
 - Node na podstawie odczytów z sensorów steruje łazikiem tak, aby łazik autonomicznie mógł przejechać przez całą tubę.
-- Autonomiczny przejazd powinno dać się uruchamić/zatrzymać za pomocą serwisu ROSowego `/enable_autonomy`.
+- Autonomiczny przejazd powinno dać się uruchomić/zatrzymać za pomocą serwisu ROSowego `/enable_autonomy`.
 
 > **Wskazówka!** Pamiętaj o regularnym commitowaniu zmian.
 
