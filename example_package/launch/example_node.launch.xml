@@ -1,0 +1,3 @@
+<launch>
+    <node name="example_node" pkg="example_package" exec="example_node" namespace="" output="screen" respawn="true" />
+</launch>
