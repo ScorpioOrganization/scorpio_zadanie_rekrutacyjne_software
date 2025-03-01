@@ -15,48 +15,48 @@ class ExampleNode : public rclcpp::Node {
 public:
   explicit ExampleNode(const rclcpp::NodeOptions& options)
     : Node("example_node", options) {
-    publisher_ = this->create_publisher<std_msgs::msg::Int8>("~/publisher_topic", 10);
+    _publisher = this->create_publisher<std_msgs::msg::Int8>("~/publisher_topic", 10);
 
-    subscriber_ = this->create_subscription<std_msgs::msg::Int8>("~/subscriber_topic", 10,
+    _subscriber = this->create_subscription<std_msgs::msg::Int8>("~/subscriber_topic", 10,
       std::bind(&ExampleNode::subscriber_callback, this, std::placeholders::_1));
 
-    service_ = this->create_service<std_srvs::srv::SetBool>("~/example_service",
+    _service = this->create_service<std_srvs::srv::SetBool>("~/example_service",
       std::bind(
         &ExampleNode::service_callback,
         this, std::placeholders::_1, std::placeholders::_2));
 
-    timer_ = this->create_wall_timer(std::chrono::seconds(1),
+    _timer = this->create_wall_timer(std::chrono::seconds(1),
       std::bind(&ExampleNode::timer_callback, this));
   }
 
 private:
-  rclcpp::Publisher<std_msgs::msg::Int8>::SharedPtr publisher_;
-  rclcpp::Subscription<std_msgs::msg::Int8>::SharedPtr subscriber_;
-  rclcpp::Service<std_srvs::srv::SetBool>::SharedPtr service_;
+  rclcpp::Publisher<std_msgs::msg::Int8>::SharedPtr _publisher;
+  rclcpp::Subscription<std_msgs::msg::Int8>::SharedPtr _subscriber;
+  rclcpp::Service<std_srvs::srv::SetBool>::SharedPtr _service;
 
-  rclcpp::TimerBase::SharedPtr timer_;
+  rclcpp::TimerBase::SharedPtr _timer;
 
-  int stored_value_ = 0;
-  bool flag_ = false;
+  int _stored_value = 0;
+  bool _flag = false;
 
   void subscriber_callback(const std_msgs::msg::Int8::SharedPtr msg) {
-    stored_value_ = msg->data;
+    _stored_value = msg->data;
     RCLCPP_INFO(this->get_logger(), "Received: %d", msg->data);
   }
 
   void timer_callback() {
     auto msg = std_msgs::msg::Int8();
-    msg.data = stored_value_;
-    publisher_->publish(msg);
+    msg.data = _stored_value;
+    _publisher->publish(msg);
   }
 
   void service_callback(const std_srvs::srv::SetBool::Request::SharedPtr request,
                         std_srvs::srv::SetBool::Response::SharedPtr response) {
     RCLCPP_INFO(this->get_logger(),
       "Received request with data: %s", request->data ? "true" : "false");
-    flag_ = request->data;
+    _flag = request->data;
     response->success = true;
-    response->message = "Flag set to " + std::string(flag_ ? "true" : "false");
+    response->message = "Flag set to " + std::string(_flag ? "true" : "false");
   }
 };
 
