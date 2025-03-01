@@ -21,8 +21,10 @@ public:
       std::bind(&ExampleNode::subscriber_callback, this, std::placeholders::_1));
 
     service_ = this->create_service<std_srvs::srv::SetBool>("~/example_service",
-      std::bind(&ExampleNode::service_callback, this, std::placeholders::_1, std::placeholders::_2));
-    
+      std::bind(
+        &ExampleNode::service_callback,
+        this, std::placeholders::_1, std::placeholders::_2));
+
     timer_ = this->create_wall_timer(std::chrono::seconds(1),
       std::bind(&ExampleNode::timer_callback, this));
   }
@@ -50,7 +52,8 @@ private:
 
   void service_callback(const std_srvs::srv::SetBool::Request::SharedPtr request,
                         std_srvs::srv::SetBool::Response::SharedPtr response) {
-    RCLCPP_INFO(this->get_logger(), "Received request with data: %s", request->data ? "true" : "false");
+    RCLCPP_INFO(this->get_logger(),
+      "Received request with data: %s", request->data ? "true" : "false");
     flag_ = request->data;
     response->success = true;
     response->message = "Flag set to " + std::string(flag_ ? "true" : "false");
