@@ -1,6 +1,6 @@
 # Projekt Scorpio - zadanie rekrutacyjne do działu Software
 W celu realizacji zadania konieczne będzie zainstalowanie ROS2 w wersji Humble (zalecany system operacyjny to Ubuntu 22.04).
-Na repozytorium znajduje się paczka ROS2 umożliwiająca połączenie z symulacją, oraz sama symulacja.
+Na repozytorium znajduje się paczka ROS2 umożliwiająca połączenie z symulacją, sama symulacja, oraz przykładowy package ROS2.
 >**Uwaga!** Przed przystąpieniem do realizacji zadania przeczytaj **całe** README.
 ## Spis treści
 - [Informacje ogólne](#informacje-ogólne)
@@ -55,10 +55,11 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
 ## Specyfikacja techniczna zadania
 > **Uwaga!** Nie modyfikuj plików utworzonych przez nas znajdujących się w paczce ROS2.
 
-**Nazwa paczki ROS2** - `simulation_endpoint`  
+**Nazwa paczki ROS2 do połączenia z symulacją** - `simulation_endpoint`
 
 - **simulation_endpoint** - przygotowany przez nas package służący do połączenia symulacji z ROS2 za pomocą protokołu TCP.
 - **rover_simulation** - stworzona przez nas symulacja łazika marsjańskiego oparta o silnik Unity. Sama w sobie działa poza ROSem, ale pozwala na połączenie z ROS2 za pomocą paczki `simulation_endpoint`, dzięki czemu możliwe jest sterowanie silnikami i odczyt danych z sensorów i kamery.
+- **example_package** - przykładowy package ROS2, zawierający prosty node napisany w C++ z subscriberem, publisherem oraz serwisem.
 
 ### Specyfikacja danych
 #### 1. Topic'i `/wheel_XX/set_effort`
