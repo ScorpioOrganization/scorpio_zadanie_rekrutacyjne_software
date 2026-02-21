@@ -12,7 +12,7 @@ Zadanie wymaga instalacji ROS2 Humble i silnie zalecamy korzystania w tym celu z
 
 Całość zadania należy wykonać w języku C++, zgodnie ze standardem C++17.
 
-Rozwiązane zadanie należy umieścić w **publicznym** repozytorium (np. GitHub) i przesłać linka do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do [TODO: uzupełnić] do końca dnia.
+Rozwiązane zadanie należy umieścić w **publicznym** repozytorium (np. GitHub) i przesłać linka do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do 29.03.2026 do końca dnia.
 
 ## Zadania do wykonania 
 W tej części znajdziesz treści poszczególnych zadań.
@@ -31,6 +31,6 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
 ## Wskazówki i przydatne linki
 
 - Zadanie rekrutacyjne można oddać niepełne.
-- Rozwiązane zadanie należy umieścić w **publicznym** repozytorium (np. GitHub) i przesłać linka do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do [TODO: uzupełnić] do końca dnia.
+- Rozwiązane zadanie należy umieścić w **publicznym** repozytorium (np. GitHub) i przesłać linka do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do 29.03.2026 do końca dnia.
 
 **Jeżeli będziesz miał jakiekolwiek wątpliwości i problemy z zadaniem śmiało skontaktuj się z nami na maila projekt@scorpio.pwr.edu.pl! Powodzenia :)**
