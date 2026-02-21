@@ -1,0 +1,3 @@
+<launch>
+  <node name="cube_detector" pkg="scorpio_zadanie_rekrutacyjne_software" exec="cube_detector" output="screen" namespace=""/>
+</launch>
