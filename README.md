@@ -28,6 +28,8 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
     - `/cube_detector/output` - topic typu `std_msgs/msg/String`, na który node wysyła wiadomości tekstowe, które otrzymał na poprzednim topicu.
   - Należy przetestować działanie node'a komendami `ros2 topic pub` oraz `ros2 topic echo`.
 
+  > **Wskazówka!** Możesz użyć tego przykładowego node'a jako bazy do realizacji kolejnych punktów zadania, ale nie jest to konieczne. Jeżeli wolisz, możesz stworzyć własny node lub node'y od zera, które będą realizować poniższe funkcjonalności.
+
 ## Wskazówki i przydatne linki
 
 - Zadanie rekrutacyjne można oddać niepełne.
