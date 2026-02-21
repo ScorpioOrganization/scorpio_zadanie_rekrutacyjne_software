@@ -68,12 +68,10 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
 
   > **Wskazówka!** To zadanie nie musi zostać zaimplementowane jako node ROS-owy.
 
-## Wskazówki
+## Wskazówki i przydatne linki
 
 - Zadanie rekrutacyjne można oddać niepełne.
 - Rozwiązane zadanie należy umieścić w **publicznym** repozytorium (np. GitHub) i przesłać linka do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do (TODO: uzupełnić) do końca dnia.
-
-## Przydatne linki
 - [Oficjalna dokumentacja ROS2 Humble](https://docs.ros.org/en/humble/index.html)
 - [Oficjalna dokumentacja RCLCPP](https://docs.ros.org/en/humble/p/rclcpp/)
 
