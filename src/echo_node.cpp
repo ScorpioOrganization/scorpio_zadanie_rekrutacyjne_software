@@ -4,16 +4,16 @@
 /**
  * This is an example - you can remove/modify it and implement your own node.
  */
-namespace cube_detector {
-class CubeDetectorNode : public rclcpp::Node {
+namespace example {
+class EchoNode : public rclcpp::Node {
 public:
-  CubeDetectorNode(const rclcpp::NodeOptions& options)
-  : rclcpp::Node("cube_detector", options),
+  EchoNode(const rclcpp::NodeOptions& options)
+  : rclcpp::Node("echo", options),
     _publisher(this->create_publisher<std_msgs::msg::String>(
       "~/output", rclcpp::QoS(1))),
     _subscription(this->create_subscription<std_msgs::msg::String>(
       "~/input", rclcpp::QoS(1),
-      std::bind(&CubeDetectorNode::input_callback, this, std::placeholders::_1))) { }
+      std::bind(&EchoNode::input_callback, this, std::placeholders::_1))) { }
 
 private:
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr _publisher;
@@ -26,7 +26,7 @@ private:
     _publisher->publish(echoed_msg);
   }
 };
-}  // namespace cube_detector
+}  // namespace example
 
 #include "rclcpp_components/register_node_macro.hpp"
-RCLCPP_COMPONENTS_REGISTER_NODE(cube_detector::CubeDetectorNode)
+RCLCPP_COMPONENTS_REGISTER_NODE(example::EchoNode)
