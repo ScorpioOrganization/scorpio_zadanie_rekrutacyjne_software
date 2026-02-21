@@ -32,7 +32,7 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
   
 2. **Wykrywanie kolorowych kostek na obrazie z kamery**
 
-  Do tego oraz kolejnego zadania został nagrany [rosbag](https://github.com/ros2/rosbag2) - należy go pobrać: [camera_bag](https://drive.google.com/drive/folders/1VAq8POilSFPc4iyDfQeEHNQKJcztpmJ5?usp=drive_link). Zostały nagrane dwa topici:
+  - Do tego oraz kolejnego zadania został nagrany [rosbag](https://github.com/ros2/rosbag2) - należy go pobrać: [camera_bag](https://drive.google.com/drive/folders/1VAq8POilSFPc4iyDfQeEHNQKJcztpmJ5?usp=drive_link). Zostały nagrane dwa topici:
     - `/zed/zed_node/left_raw/image_raw_color` typu `sensor_msgs/msg/Image` - obraz z kamery nagrany w naszym warsztacie.
     - `/zed/zed_node/left_raw/camera_info` typu `sensor_msgs/msg/CameraInfo` - parametry kamery.
 
