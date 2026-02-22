@@ -32,46 +32,55 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
   
 2. **Wykrywanie kolorowych kostek na obrazie z kamery**
 
-  - Do tego oraz kolejnego zadania został nagrany [rosbag](https://github.com/ros2/rosbag2) - należy go pobrać: [camera_bag](https://drive.google.com/drive/folders/1VAq8POilSFPc4iyDfQeEHNQKJcztpmJ5?usp=drive_link). Zostały nagrane dwa topici:
-    - `/zed/zed_node/left_raw/image_raw_color` typu `sensor_msgs/msg/Image` - obraz z kamery nagrany w naszym warsztacie.
-    - `/zed/zed_node/left_raw/camera_info` typu `sensor_msgs/msg/CameraInfo` - parametry kamery.
+  Twoim zadaniem będzie wykrycie kolorowych kostek na obrazie z kamery i określenie współrzędnych ich środka na każdej klatce.
 
-  Podczas nagrywania w warsztacie zostały rozmieszczone 4 kolorowe kostki:
+  Do tego zadania nagraliśmy obraz z kamery umieszczonej na łaziku przejeżdżającym przez nasz warsztat. W warsztacie rozmieściliśmy 4 kolorowe kostki:
   <div style="display: flex; justify-content: center; gap: 10px;">
     <img src="assets/readme/kostki.jpg" alt="Kolorowe kostki" width="400">
   </div>
 
-  - Należy odtworzyć rosbaga za pomocą komendy `ros2 bag play <ścieżka do pobranego folderu>`.
+  Nagranie z kamery jest w formie [rosbag'a](https://github.com/ros2/rosbag2) - należy go pobrać: [camera_bag](https://drive.google.com/drive/folders/1VAq8POilSFPc4iyDfQeEHNQKJcztpmJ5?usp=drive_link). Zostały nagrane dwa topici:
+  - `/zed/zed_node/left_raw/image_raw_color` typu `sensor_msgs/msg/Image`: obraz z kamery nagrany w naszym warsztacie.
+  - `/zed/zed_node/left_raw/camera_info` typu `sensor_msgs/msg/CameraInfo`: parametry kamery.
+
+  Należy odtworzyć rosbaga za pomocą komendy `ros2 bag play <ścieżka do pobranego folderu>`.
+
+  > **Wskazówka!** Argument `--loop` pozwala na odtwarzanie rosbaga w pętli, co może być przydatne podczas testowania rozwiązania. 
   
-  - Dla każdej klatki obrazu odtworzonego z rosbaga należy opublikować na czterech topicach typu `geometry_msgs/msg/Point` wiadomości określające współrzędne `x` i `y` środka danej kostki na klatce w pikselach (pole `z` należy zostawić puste). Jeżeli dana kostka nie jest widoczna na klatce, to w pola x i y wstawić minimalną wartość `Float64`. Nazwy topiców powinny być następujące:
-    - `cube_detector/red_cube/position_on_frame` - topic dla czerwonej kostki
-    - `cube_detector/green_cube/position_on_frame` - topic dla zielonej kostki
-    - `cube_detector/blue_cube/position_on_frame` - topic dla niebieskiej kostki
-    - `cube_detector/white_cube/position_on_frame` - topic dla białej kostki
+  Dla każdej klatki obrazu odtworzonego z rosbaga należy opublikować na czterech topicach typu `geometry_msgs/msg/Point` wiadomość określającą współrzędne `x` i `y` środka danej kostki na klatce w pikselach (pole `z` należy zostawić puste). Jeżeli dana kostka nie jest widoczna na klatce, to w pola x i y wstawić minimalną wartość `Float64`. Nazwy topiców powinny być następujące:
+  - `cube_detector/red_cube/position_on_frame`: topic dla czerwonej kostki
+  - `cube_detector/green_cube/position_on_frame`: topic dla zielonej kostki
+  - `cube_detector/blue_cube/position_on_frame`: topic dla niebieskiej kostki
+  - `cube_detector/white_cube/position_on_frame`: topic dla białej kostki
 
 > **Wskazówka!** ROS2 udostępnia bibliotekę [cv_bridge](https://index.ros.org/p/cv_bridge/), pozwalającą m. in. przetwarzać obraz z topiców na `cv::Mat` z biblioteki OpenCV. Aby skorzystać z dodatkowych paczek w ramach tego projektu należy zmodyfikować `CMakeLists.txt` i `package.xml` - przykład dla tej biblioteki znajdziecie zakomentowany w tych plikach. Po zdefiniowaniu zależności polecenie `rosdep install --from-paths src -y --ignore-src` wywołane z poziomu workspace zainstaluje odpowiednie paczki.
 
 3. **Rysowanie bounding box**
 
-  Korzystając, w ten sam sposób, z tych samych danych z kamery, należy narysować [bounding boxy](https://docs.opencv.org/4.x/da/d0c/tutorial_bounding_rects_circles.html) wokół każdej z kostek, które będą widoczne na obrazie. Należy opublikować obraz z narysowanymi bounding boxami na topicu `cube_detector/detected_cubes/image` typu `sensor_msgs/msg/Image`. Na tym topicu powinien być publikowany obraz, który będzie taki sam jak ten z kamery, ale z narysowanymi bounding boxami wokół każdej z kostek, które są widoczne na danej klatce.
+  Twoim zadaniem jest narysować [bounding boxy](https://docs.opencv.org/4.x/da/d0c/tutorial_bounding_rects_circles.html) wokół każdej z kostek, które będą widoczne na obrazie i tak zmodyfikowany obraz opublikować.
 
-  > **Wskazówka!** Do podglądu obrazu na topicu można użyć np. `rviz2`.
+  Należy wykorzystać tego samego rosbag'a, co w poprzednim zadaniu.
+
+  Należy, dla każdej klatki z rosbag'a, opublikować obraz z narysowanymi bounding boxami na topicu `cube_detector/detected_cubes/image` typu `sensor_msgs/msg/Image`. Obraz powinien być taki sam jak ten z topicu `/zed/zed_node/left_raw/image_raw_color`, ale z narysowanymi bounding boxami wokół widocznych kostek.
+
+  > **Wskazówka!** Do podglądu obrazu na topicu można użyć np. [rqt](https://docs.ros.org/en/humble/Concepts/Intermediate/About-RQt.html).
 
 4. **Wykrywanie ilmenitu**
 
-  W folderze `assets/ilmenite_samples` znajdują się zdjęcia mikroskopowe piasku, który zawiera domieszkę ilmenitu (ciemniejsze ziarna na zdjęciu). Celem zadania jest napisanie oprogramowania implementującego metodę określania zawartości procentowej ilmenitu w całej próbce widocznej na jednym zdjęciu. W ramach pojedyńczego wywołania programu należy przeanalizować każdą próbkę zawartą w folderze. Dla każdej próbki wynik powinień być wypisany na konsolę w następujący sposób:
+  > **Uwaga** To zadanie nie musi zostać wykonane jako node ROS'owy!
+
+  W folderze `assets/ilmenite_samples` znajdują się zdjęcia mikroskopowe piasku, który zawiera domieszkę [ilmenitu](https://en.wikipedia.org/wiki/Ilmenite) (ciemniejsze ziarna na zdjęciu). Celem zadania jest napisanie oprogramowania implementującego metodę określania zawartości procentowej ilmenitu w całej próbce widocznej na jednym zdjęciu. W ramach pojedyńczego wywołania programu należy przeanalizować każdą próbkę zawartą w folderze. Dla każdej próbki wynik powinień być wypisany na konsolę w następujący sposób:
   ```
   sample_A.jpg - 15.0%
   sample_B.jpg - 98.0%
   [...]
   ```
 
-  > **Wskazówka!** To zadanie nie musi zostać zaimplementowane jako node ROS-owy.
-
 ## Wskazówki i przydatne linki
 
 - Zadanie rekrutacyjne można oddać niepełne.
 - Rozwiązane zadanie należy umieścić w **publicznym** repozytorium (np. GitHub) i przesłać linka do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do (TODO: uzupełnić) do końca dnia.
+- [ROS2 Humble crash course](https://www.youtube.com/watch?v=Gg25GfA456o)
 - [Oficjalna dokumentacja ROS2 Humble](https://docs.ros.org/en/humble/index.html)
 - [Oficjalna dokumentacja RCLCPP](https://docs.ros.org/en/humble/p/rclcpp/)
 
