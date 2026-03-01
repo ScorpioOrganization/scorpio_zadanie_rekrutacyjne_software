@@ -1,6 +1,6 @@
 # Projekt Scorpio - zadanie rekrutacyjne do działu Software
 
-> **Uwaga!** Przed przystąpieniem do realizacji zadania przeczytaj **całe** README i pamiętaj, żeby wypełnić [formularz rekrutacyjny]([TODO: uzupełnić]).
+> **Uwaga!** Przed przystąpieniem do realizacji zadania przeczytaj **całe** README i pamiętaj, żeby wypełnić [formularz rekrutacyjny](https://forms.gle/byQocAinGP7jo8QM7).
 
 ## Spis treści
 - [Informacje ogólne](#informacje-ogólne)
