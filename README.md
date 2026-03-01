@@ -12,12 +12,12 @@ Zadanie wymaga instalacji ROS2 Humble i silnie zalecamy korzystania w tym celu z
 
 Wszystkie zadania należy wykonać w języku C++.
 
-Rozwiązane zadanie należy umieścić w **publicznym** repozytorium (np. GitHub) i przesłać link do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do (TODO: uzupełnić) do końca dnia.
+Rozwiązane zadanie należy umieścić w **publicznym** repozytorium (np. GitHub) i przesłać link do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do 29.03.2026 do końca dnia.
 
 ## Zadania do wykonania 
 Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko programowania i znajomości algorytmów -  więc nawet w przypadku zrealizowania tylko części z poniższych punktów, zachęcamy do przesłania rozwiązania. Postępy w zadaniu powinny być udokumentowane w repozytorium na GitHubie.
 
-1. **Konfiguracja projektu i zbudowanie przykładu**
+1. **Konfiguracja ROS'a i zbudowanie przykładu**
 
   - Należy zainstalować ROS2 Humble zgodnie z [oficjalną instrukcją](https://docs.ros.org/en/humble/Installation.html) na odpowiedni system.
   - Należy [utworzyć workspace ROS-owy](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html), i sklonować do folderu `src` to repozytorium.
@@ -30,7 +30,18 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
 
   > **Wskazówka!** Możesz użyć tego przykładowego node'a jako bazy do realizacji kolejnych punktów zadania, ale nie jest to konieczne. Jeżeli wolisz, możesz stworzyć własny node lub node'y od zera, które będą realizować poniższe funkcjonalności.
   
-2. **Wykrywanie kolorowych kostek na obrazie z kamery**
+2. **Wykrywanie ilmenitu**
+
+  > **Uwaga** To zadanie nie musi zostać wykonane jako node ROS'owy!
+
+  W folderze `assets/ilmenite_samples` znajdują się zdjęcia mikroskopowe piasku, który zawiera domieszkę [ilmenitu](https://en.wikipedia.org/wiki/Ilmenite) (ciemniejsze ziarna na zdjęciu). Celem zadania jest napisanie oprogramowania implementującego metodę określania zawartości procentowej ilmenitu w całej próbce widocznej na jednym zdjęciu. W ramach pojedyńczego wywołania programu należy przeanalizować każdą próbkę zawartą w folderze. Dla każdej próbki wynik powinień być wypisany na konsolę w następujący sposób:
+  ```
+  sample_A.jpg - 15.0%
+  sample_B.jpg - 98.0%
+  [...]
+  ```
+  
+3. **Wykrywanie kolorowych kostek na obrazie z kamery**
 
   Twoim zadaniem będzie wykrycie kolorowych kostek na obrazie z kamery i określenie współrzędnych ich środka na każdej klatce.
 
@@ -55,7 +66,7 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
 
 > **Wskazówka!** ROS2 udostępnia bibliotekę [cv_bridge](https://index.ros.org/p/cv_bridge/), pozwalającą m. in. przetwarzać obraz z topiców na `cv::Mat` z biblioteki OpenCV. Aby skorzystać z dodatkowych paczek w ramach tego projektu należy zmodyfikować `CMakeLists.txt` i `package.xml` - przykład dla tej biblioteki znajdziecie zakomentowany w tych plikach. Po zdefiniowaniu zależności polecenie `rosdep install --from-paths src -y --ignore-src` wywołane z poziomu workspace zainstaluje odpowiednie paczki.
 
-3. **Rysowanie bounding box**
+4. **Rysowanie bounding box**
 
   Twoim zadaniem jest narysować [bounding boxy](https://docs.opencv.org/4.x/da/d0c/tutorial_bounding_rects_circles.html) wokół każdej z kostek, które będą widoczne na obrazie i tak zmodyfikowany obraz opublikować.
 
@@ -65,21 +76,10 @@ Pamiętaj, że zadanie służy sprawdzeniu wielu umiejętności - nie tylko prog
 
   > **Wskazówka!** Do podglądu obrazu na topicu można użyć np. [rqt](https://docs.ros.org/en/humble/Concepts/Intermediate/About-RQt.html).
 
-4. **Wykrywanie ilmenitu**
-
-  > **Uwaga** To zadanie nie musi zostać wykonane jako node ROS'owy!
-
-  W folderze `assets/ilmenite_samples` znajdują się zdjęcia mikroskopowe piasku, który zawiera domieszkę [ilmenitu](https://en.wikipedia.org/wiki/Ilmenite) (ciemniejsze ziarna na zdjęciu). Celem zadania jest napisanie oprogramowania implementującego metodę określania zawartości procentowej ilmenitu w całej próbce widocznej na jednym zdjęciu. W ramach pojedyńczego wywołania programu należy przeanalizować każdą próbkę zawartą w folderze. Dla każdej próbki wynik powinień być wypisany na konsolę w następujący sposób:
-  ```
-  sample_A.jpg - 15.0%
-  sample_B.jpg - 98.0%
-  [...]
-  ```
-
 ## Wskazówki i przydatne linki
 
 - Zadanie rekrutacyjne można oddać niepełne.
-- Rozwiązane zadanie należy umieścić w **publicznym** repozytorium (np. GitHub) i przesłać linka do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do (TODO: uzupełnić) do końca dnia.
+- Rozwiązane zadanie należy umieścić w **publicznym** repozytorium (np. GitHub) i przesłać linka do tego repozytorium na mail projekt@scorpio.pwr.edu.pl. Ewentualne pytania lub wątpliwości co do treści zadania można kierować na tego samego maila. Zadania przyjmujemy do 29.03.2026 do końca dnia.
 - [ROS2 Humble crash course](https://www.youtube.com/watch?v=Gg25GfA456o)
 - [Oficjalna dokumentacja ROS2 Humble](https://docs.ros.org/en/humble/index.html)
 - [Oficjalna dokumentacja RCLCPP](https://docs.ros.org/en/humble/p/rclcpp/)
