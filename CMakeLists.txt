@@ -1,54 +1,42 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.8)
+project(scorpio_zadanie_rekrutacyjne_software)
 
-project(scorpio_recruitment_task)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(rclcpp_components REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+# find_package(cv_bridge REQUIRED) # Example of importing cv_bridge
 
+include_directories(include)
 
-# Exercise library
-add_library(backend SHARED
-  src/backend/motor.cpp
-  src/backend/basic_tester.cpp
+# Echo node component
+add_library(echoNode SHARED src/echo_node.cpp)
+ament_target_dependencies(echoNode
+  rclcpp
+  rclcpp_components
+  std_msgs
+  geometry_msgs
+  sensor_msgs
+  # cv_bridge
 )
-target_include_directories(backend PUBLIC
-  include/backend_interface/
-  include/backend/
+rclcpp_components_register_node(echoNode PLUGIN "example::EchoNode" EXECUTABLE echo)
+
+# Install libraries
+install(TARGETS
+  echoNode
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
 )
-target_include_directories(backend PRIVATE include/solution_interface/)
 
-
-# Solution library
-file(GLOB solution_SRC "src/solution/*.cpp")
-add_library(solution SHARED ${solution_SRC})
-target_include_directories(solution PRIVATE
-  include/solution/
-  include/backend_interface/
+# Install config and launch files
+install(DIRECTORY
+  config
+  launch
+  DESTINATION share/${PROJECT_NAME}/
 )
-target_include_directories(solution PUBLIC include/solution_interface/)
 
-
-# Executable for the exercise
-add_executable(scorpio_recruitment_task src/main.cpp)
-target_include_directories(scorpio_recruitment_task PRIVATE include/)
-target_link_libraries(scorpio_recruitment_task PRIVATE backend solution)
-
-
-# Unit tests
-if(BUILD_TESTS)
-  enable_testing()
-  find_package(GTest REQUIRED)
-  include(GoogleTest)
-  file(GLOB test_SRC "unit_tests/test_*.cpp")
-  add_executable(tests ${test_SRC}
-    src/backend/motor.cpp
-    src/backend/basic_tester.cpp
-  )
-  target_include_directories(tests PRIVATE
-    include/backend_interface/
-    include/backend/
-    include/
-  )
-  target_link_libraries(tests PRIVATE GTest::GTest GTest::Main solution)
-  gtest_discover_tests(tests)
-endif()
+ament_package()

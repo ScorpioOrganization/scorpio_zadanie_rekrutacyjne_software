@@ -1,6 +1,7 @@
 .vscode
 .idea
 build
+compile_commands.json
 *.o
 *.exe
 *.out
@@ -10,3 +11,4 @@ build
 *.swp
 *.bak
 *.dSYM
+*.db3
